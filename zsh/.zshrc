@@ -196,3 +196,6 @@ alias kssh="kitten ssh"
 export DYLD_FALLBACK_LIBRARY_PATH=/opt/homebrew/lib
 
 export PATH="/Users/ian/Documents/dev/jupyterlab-claude-code/bin:$PATH"
+
+# zoxide: smarter cd
+eval "$(zoxide init zsh)"
