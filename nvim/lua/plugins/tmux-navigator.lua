@@ -9,6 +9,7 @@ return {
     event = "VeryLazy",
     keys = {
       { "<C-h>", "<cmd>ZellijNavigateLeftTab<cr>", desc = "Navigate left (zellij/vim)" },
+      { "<BS>", "<cmd>ZellijNavigateLeftTab<cr>", desc = "Navigate left (zellij/vim)" },
       { "<C-j>", "<cmd>ZellijNavigateDown<cr>", desc = "Navigate down (zellij/vim)" },
       { "<C-k>", "<cmd>ZellijNavigateUp<cr>", desc = "Navigate up (zellij/vim)" },
       { "<C-l>", "<cmd>ZellijNavigateRightTab<cr>", desc = "Navigate right (zellij/vim)" },

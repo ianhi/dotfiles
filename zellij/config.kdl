@@ -25,7 +25,9 @@ theme "tokyo-night"
 default_layout "clean"
 pane_frames false
 scroll_buffer_size 50000
-copy_on_select false
+copy_on_select true
+copy_command "pbcopy"
+copy_clipboard "system"
 scrollback_editor "nvim"
 on_force_close "detach"
 session_serialization true
@@ -37,14 +39,20 @@ show_release_notes false
 // Two ways to do things:
 //   1. Tmux-style: Ctrl+A then key (quick one-shot actions)
 //   2. Native modes: Ctrl+P/T/N/S for sustained pane/tab/resize/scroll
-// Ctrl+hjkl always navigates panes (no prefix needed).
+// Ctrl+hjkl navigates panes seamlessly (autolock passes them to nvim when focused).
 keybinds clear-defaults=true {
-    // --- Normal mode: all keys pass through to apps ---
-    normal {}
+    // --- Normal mode: re-trigger autolock after shell commands ---
+    normal {
+        bind "Enter" { WriteChars "\u{000D}"; MessagePlugin "autolock" {}; }
+    }
 
     // --- Locked mode: everything passes through except the unlock key ---
     locked {
         bind "Ctrl g" { SwitchToMode "normal"; }
+        bind "Alt z" {
+            MessagePlugin "autolock" { payload "disable"; };
+            SwitchToMode "normal";
+        }
     }
 
     // --- Tmux mode (prefix: Ctrl+A) ---
@@ -240,7 +248,7 @@ keybinds clear-defaults=true {
     // Native modes accessible via Ctrl+A then mode key
     // (not bound globally - would conflict with apps like Claude Code)
 
-    // Ctrl+hjkl for pane navigation (no prefix needed)
+    // Ctrl+hjkl for pane navigation (autolock passes these to nvim when focused)
     shared_except "locked" {
         bind "Ctrl h" { MoveFocusOrTab "left"; }
         bind "Ctrl j" { MoveFocus "down"; }
@@ -248,6 +256,16 @@ keybinds clear-defaults=true {
         bind "Ctrl l" { MoveFocusOrTab "right"; }
         bind "Alt n" { NewPane; }
         bind "Alt f" { ToggleFloatingPanes; }
+        bind "Alt z" {
+            MessagePlugin "autolock" { payload "disable"; };
+            SwitchToMode "locked";
+        }
+    }
+
+    shared {
+        bind "Alt Shift z" {
+            MessagePlugin "autolock" { payload "enable"; };
+        }
     }
 }
 
@@ -262,4 +280,15 @@ plugins {
     }
     configuration location="zellij:configuration"
     plugin-manager location="zellij:plugin-manager"
+    autolock location="file:~/.config/zellij/plugins/zellij-autolock.wasm" {
+        is_enabled true
+        triggers "nvim|vim|git|fzf|zoxide|atuin"
+        reaction_seconds "0.3"
+        print_to_log false
+    }
 }
+
+load_plugins {
+    autolock
+}
+
