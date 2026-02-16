@@ -1,0 +1,9 @@
+# Neovim
+nvim/lazy-lock.json
+nvim/.repro/
+nvim/debug/
+nvim/*.log
+nvim/data/
+
+# macOS
+.DS_Store

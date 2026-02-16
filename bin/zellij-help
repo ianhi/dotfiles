@@ -1,0 +1,59 @@
+#!/bin/bash
+cat <<'EOF'
+╭─────────────────────────────────────────────────╮
+│             Zellij Keybindings                  │
+╰─────────────────────────────────────────────────╯
+
+ ALWAYS AVAILABLE (no prefix)
+  Ctrl+h/j/k/l    Move between panes/tabs
+  Alt+n            New pane
+  Alt+f            Toggle floating pane
+  Ctrl+g           Lock (pass all keys through)
+
+ PREFIX: Ctrl+A then...
+
+ Quick Actions (one-shot, returns to normal)
+  v / s            Split right / down
+  h/j/k/l          Navigate panes
+  H/J/K/L          Resize panes
+  c                New tab
+  n / p            Next / prev tab
+  1-9              Go to tab N
+  ,                Rename tab
+  x                Close pane
+  z                Fullscreen pane
+  f                Toggle floating panes
+  Enter / [        Scroll mode
+  d                Detach session
+  w                Session manager
+
+ Native Modes (Ctrl+A then SHIFT key, sustained/repeatable)
+  P                Pane mode
+    n/d/r          New pane / down / right
+    h/j/k/l        Navigate (repeatable)
+    s              Stacked pane
+    e              Float/embed toggle
+
+  T                Tab mode
+    n              New tab
+    h/l            Prev / next (repeatable)
+    r              Rename
+    b              Break pane to new tab
+
+  N                Resize mode
+    h/j/k/l        Grow (repeatable)
+    H/J/K/L        Shrink
+    +/-            Grow / shrink all
+
+  S                Scroll mode (vim-style)
+    j/k            Scroll line
+    d/u            Half page
+    /              Search
+    e              Edit scrollback in nvim
+
+  O                Session mode
+    d              Detach
+    w              Session manager
+
+  Esc / Enter      Exit any mode → normal
+EOF
