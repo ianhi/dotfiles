@@ -1,7 +1,7 @@
 return {
   {
-    "mpiannucci/copy-context",
-    dir = "/Users/ian/Documents/dev/copy-context", -- Use local path
+    "ianhi/copy-context",
+    branch = "file-explorer-support",
     opts = {
       disable_default_keymap = true,
     },
