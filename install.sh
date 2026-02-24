@@ -40,6 +40,15 @@ link "$DOTFILES/kitty/current-theme.conf" "$HOME/.config/kitty/current-theme.con
 echo "Zellij:"
 link "$DOTFILES/zellij/config.kdl" "$HOME/.config/zellij/config.kdl"
 link "$DOTFILES/zellij/layouts/clean.kdl" "$HOME/.config/zellij/layouts/clean.kdl"
+AUTOLOCK="$HOME/.config/zellij/plugins/zellij-autolock.wasm"
+if [ ! -f "$AUTOLOCK" ]; then
+    mkdir -p "$(dirname "$AUTOLOCK")"
+    echo "  Downloading zellij-autolock plugin..."
+    curl -sL https://github.com/fresh2dev/zellij-autolock/releases/latest/download/zellij-autolock.wasm -o "$AUTOLOCK"
+    echo "  Downloaded $AUTOLOCK"
+else
+    echo "  zellij-autolock plugin already exists"
+fi
 
 # Neovim (link entire directory)
 echo "Neovim:"
