@@ -184,6 +184,16 @@ uvscript() {
 export PATH="/Users/ian/.pixi/bin:$PATH"
 eval "$(pixi completion --shell zsh)"
 
+# Fix completions for pixi run (file completion after task name)
+_pixi_run_mod() {
+    if [[ "$words[2]" == "run" && "$words[CURRENT]" != -* ]]; then
+        _arguments '*:filename:_files'
+    else
+        _pixi "$@"
+    fi
+}
+compdef _pixi_run_mod pixi
+
 _al_completion() {
   eval $(env _TYPER_COMPLETE_ARGS="${words[1,$CURRENT]}" _AL_COMPLETE=complete_zsh al)
 }
@@ -199,3 +209,11 @@ export PATH="/Users/ian/Documents/dev/jupyterlab-claude-code/bin:$PATH"
 
 # zoxide: smarter cd
 eval "$(zoxide init zsh)"
+
+# pnpm
+export PNPM_HOME="/Users/ian/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
