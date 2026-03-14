@@ -5,5 +5,8 @@ nvim/debug/
 nvim/*.log
 nvim/data/
 
+# Claude Code
+.claude/
+
 # macOS
 .DS_Store
